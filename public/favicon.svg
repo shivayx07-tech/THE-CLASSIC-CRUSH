@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="100%" height="100%">
+  <defs>
+    <linearGradient id="goldGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#F9E8A2" />
+      <stop offset="50%" stop-color="#D4AF37" />
+      <stop offset="100%" stop-color="#9A6B1F" />
+    </linearGradient>
+    <linearGradient id="bgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#1B3026" />
+      <stop offset="100%" stop-color="#0B1712" />
+    </linearGradient>
+    <filter id="glow" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="2" stdDeviation="4" flood-color="#D4AF37" flood-opacity="0.3"/>
+    </filter>
+  </defs>
+  
+  <!-- Outer circle with rich forest green background and gold rim -->
+  <circle cx="256" cy="256" r="240" fill="url(#bgGrad)" stroke="url(#goldGrad)" stroke-width="20" />
+  <circle cx="256" cy="256" r="218" fill="none" stroke="url(#goldGrad)" stroke-width="4" stroke-dasharray="10 6" opacity="0.6" />
+  
+  <!-- Monogram Tcc -->
+  <text x="256" y="316" font-family="'Cormorant Garamond', 'Georgia', 'Times New Roman', serif" font-size="200" font-weight="700" fill="url(#goldGrad)" text-anchor="middle" filter="url(#glow)" letter-spacing="-6">Tcc</text>
+  
+  <!-- Subtle decorative stars -->
+  <path d="M 256 85 L 263 105 L 283 112 L 263 119 L 256 139 L 249 119 L 229 112 L 249 105 Z" fill="url(#goldGrad)" />
+</svg>
