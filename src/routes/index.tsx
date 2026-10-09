@@ -17,18 +17,30 @@ import { inr } from "@/lib/pricing";
 
 const slides = [slideBrownie, slidePizza, slideCoffee, hero];
 
-export const Route = createFileRoute("/")(({
+export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
       { title: "The Classic Crush — Order Desserts & Café Bites Online" },
-      { name: "description", content: "Signature chocolate desserts, patties, pizza, sandwiches, momos and shakes. Order for delivery or pickup." },
+      {
+        name: "description",
+        content:
+          "Signature chocolate desserts, patties, pizza, sandwiches, momos and shakes. Order for delivery or pickup.",
+      },
       { property: "og:title", content: "The Classic Crush — Bakery & Café" },
-      { property: "og:description", content: "Made with love by the School of Hotel Management. Order online for delivery or pickup." },
+      {
+        property: "og:description",
+        content:
+          "Made with love by the School of Hotel Management. Order online for delivery or pickup.",
+      },
     ],
   }),
-  loader: ({ context }) => Promise.all([context.queryClient.ensureQueryData(menuQuery), context.queryClient.ensureQueryData(settingsQuery)]),
+  loader: ({ context }) =>
+    Promise.all([
+      context.queryClient.ensureQueryData(menuQuery),
+      context.queryClient.ensureQueryData(settingsQuery),
+    ]),
   component: Home,
-}));
+});
 
 // CrowdFavourites must be defined BEFORE Home due to TanStack Router code-splitting
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -90,7 +102,9 @@ function CrowdFavourites({ best }: { best: any[] }) {
     if (!el || !isDragging.current) return;
     isDragging.current = false;
     el.style.cursor = "";
-    setTimeout(() => { if (el) el.style.scrollSnapType = ""; }, 80);
+    setTimeout(() => {
+      if (el) el.style.scrollSnapType = "";
+    }, 80);
   }, []);
 
   return (
@@ -155,9 +169,7 @@ function CrowdFavourites({ best }: { best: any[] }) {
         </div>
       </div>
 
-      <p className="mt-2 text-center text-xs text-muted-foreground">
-        Drag or swipe to see more →
-      </p>
+      <p className="mt-2 text-center text-xs text-muted-foreground">Drag or swipe to see more →</p>
     </section>
   );
 }
@@ -166,9 +178,14 @@ function Home() {
   const { data } = useSuspenseQuery(menuQuery);
   const { data: sd } = useSuspenseQuery(settingsQuery);
   const s = sd.settings;
-  const best = data.products.filter((p) => p.is_bestseller || p.category_id === data.categories[0]?.id).slice(0, 10);
+  const best = data.products
+    .filter((p) => p.is_bestseller || p.category_id === data.categories[0]?.id)
+    .slice(0, 10);
   const [slide, setSlide] = useState(0);
-  useEffect(() => { const t = setInterval(() => setSlide((i) => (i + 1) % slides.length), 5000); return () => clearInterval(t); }, []);
+  useEffect(() => {
+    const t = setInterval(() => setSlide((i) => (i + 1) % slides.length), 5000);
+    return () => clearInterval(t);
+  }, []);
   const [y, setY] = useState(0);
   useEffect(() => {
     const on = () => setY(window.scrollY);
@@ -180,40 +197,84 @@ function Home() {
     <div>
       <section className="relative overflow-hidden bg-forest text-forest-foreground">
         <AnimatePresence initial={false}>
-          <motion.div key={slide} className="absolute inset-0 -top-20 bg-cover bg-center will-change-transform" style={{ backgroundImage: `url(${slides[slide]})`, y: y * 0.4 }} initial={{ opacity: 0, scale: 1.12 }} animate={{ opacity: 1, scale: 1.04 }} exit={{ opacity: 0 }} transition={{ opacity: { duration: 1.4 }, scale: { duration: 6, ease: "linear" } }} />
+          <motion.div
+            key={slide}
+            className="absolute inset-0 -top-20 bg-cover bg-center will-change-transform"
+            style={{ backgroundImage: `url(${slides[slide]})`, y: y * 0.4 }}
+            initial={{ opacity: 0, scale: 1.12 }}
+            animate={{ opacity: 1, scale: 1.04 }}
+            exit={{ opacity: 0 }}
+            transition={{ opacity: { duration: 1.4 }, scale: { duration: 6, ease: "linear" } }}
+          />
         </AnimatePresence>
         <div className="absolute inset-0 bg-gradient-to-r from-forest/95 via-forest/60 to-forest/10" />
         <div className="absolute inset-0 bg-gradient-to-t from-forest/90 via-transparent to-forest/40" />
         <div className="absolute bottom-6 left-1/2 z-10 flex -translate-x-1/2 gap-2">
-          {slides.map((_, i) => <button key={i} aria-label={`Slide ${i + 1}`} onClick={() => setSlide(i)} className={`h-1.5 rounded-full transition-all ${i === slide ? "w-8 bg-gold" : "w-3 bg-forest-foreground/50"}`} />)}
+          {slides.map((_, i) => (
+            <button
+              key={i}
+              aria-label={`Slide ${i + 1}`}
+              onClick={() => setSlide(i)}
+              className={`h-1.5 rounded-full transition-all ${i === slide ? "w-8 bg-gold" : "w-3 bg-forest-foreground/50"}`}
+            />
+          ))}
         </div>
         <div className="relative mx-auto grid max-w-6xl items-center gap-10 px-4 py-14 md:min-h-[640px] md:grid-cols-2 md:py-24">
           <div className="space-y-6">
-            <Reveal><span className="animate-float inline-flex items-center gap-2 rounded-full border border-gold/50 bg-forest-foreground/10 px-4 py-1.5 text-xs font-semibold uppercase tracking-[0.2em] text-gold backdrop-blur"><Leaf className="size-3.5" /> 100% Pure Vegetarian</span></Reveal>
-            <Reveal delay={100}><h1 className="text-5xl font-semibold leading-[1.02] md:text-7xl">The Classic Crush</h1></Reveal>
-            <Reveal delay={200}><p className="font-script text-4xl text-gold md:text-5xl">Made with Love</p></Reveal>
-            <Reveal delay={300}><p className="max-w-md text-lg opacity-85">Chocolate-loaded signature desserts, warm patties, cheesy pizzas and cool shakes — baked fresh by the School of Hotel Management, delivered to your door.</p></Reveal>
+            <Reveal>
+              <span className="animate-float inline-flex items-center gap-2 rounded-full border border-gold/50 bg-forest-foreground/10 px-4 py-1.5 text-xs font-semibold uppercase tracking-[0.2em] text-gold backdrop-blur">
+                <Leaf className="size-3.5" /> 100% Pure Vegetarian
+              </span>
+            </Reveal>
+            <Reveal delay={100}>
+              <h1 className="text-5xl font-semibold leading-[1.02] md:text-7xl">
+                The Classic Crush
+              </h1>
+            </Reveal>
+            <Reveal delay={200}>
+              <p className="font-script text-4xl text-gold md:text-5xl">Made with Love</p>
+            </Reveal>
+            <Reveal delay={300}>
+              <p className="max-w-md text-lg opacity-85">
+                Chocolate-loaded signature desserts, warm patties, cheesy pizzas and cool shakes —
+                baked fresh by the School of Hotel Management, delivered to your door.
+              </p>
+            </Reveal>
             <Reveal delay={400} className="flex flex-wrap gap-3">
-              <PillButton variant="gold" className="glow-hover"><Link to="/menu">Order Now</Link></PillButton>
-              <PillButton variant="outline" className="glow-hover"><Link to="/orders">Track an order</Link></PillButton>
+              <PillButton variant="gold" className="glow-hover">
+                <Link to="/menu">Order Now</Link>
+              </PillButton>
+              <PillButton variant="outline" className="glow-hover">
+                <Link to="/orders">Track an order</Link>
+              </PillButton>
             </Reveal>
             <Reveal delay={500} className="flex flex-wrap gap-5 pt-2 text-sm opacity-90">
-              <span className="flex items-center gap-2"><Bike className="size-4 text-gold" /> Delivery within {s.max_radius_km} km</span>
-              <span className="flex items-center gap-2"><Store className="size-4 text-gold" /> Pickup in ~{s.prep_minutes} min</span>
-              <span className="flex items-center gap-2"><Clock className="size-4 text-gold" /> {s.opening_hours}</span>
+              <span className="flex items-center gap-2">
+                <Bike className="size-4 text-gold" /> Delivery within {s.max_radius_km} km
+              </span>
+              <span className="flex items-center gap-2">
+                <Store className="size-4 text-gold" /> Pickup in ~{s.prep_minutes} min
+              </span>
+              <span className="flex items-center gap-2">
+                <Clock className="size-4 text-gold" /> {s.opening_hours}
+              </span>
             </Reveal>
           </div>
           <Reveal variant="zoom" className="relative hidden justify-end self-end md:flex">
             <div className="rounded-2xl border border-forest-foreground/20 bg-forest-foreground/10 px-5 py-3 shadow-lift backdrop-blur-md">
               <div className="eyebrow text-gold">Free delivery</div>
-              <div className="font-display text-xl font-semibold">on orders above {inr(s.free_delivery_threshold)}</div>
+              <div className="font-display text-xl font-semibold">
+                on orders above {inr(s.free_delivery_threshold)}
+              </div>
             </div>
           </Reveal>
         </div>
       </section>
 
       {!s.is_open && (
-        <div className="bg-destructive py-2 text-center text-sm text-destructive-foreground">We're not taking orders right now. Please check back soon.</div>
+        <div className="bg-destructive py-2 text-center text-sm text-destructive-foreground">
+          We're not taking orders right now. Please check back soon.
+        </div>
       )}
 
       <section className="mx-auto max-w-6xl px-4 pt-16">
@@ -226,8 +287,21 @@ function Home() {
       <div className="relative mt-2 overflow-hidden py-2 [mask-image:linear-gradient(90deg,transparent,black_8%,black_92%,transparent)]">
         <div className="animate-marquee flex w-max gap-4">
           {[...data.categories, ...data.categories].map((c, i) => (
-            <Link key={c.id + i} to="/menu" search={{ c: c.slug }} aria-hidden={i >= data.categories.length} className="group relative w-52 shrink-0 overflow-hidden rounded-2xl shadow-card sm:w-64">
-              <img src={foodImage(c.image_key)} alt={c.name} loading="lazy" width={816} height={816} className="aspect-square w-full object-cover transition duration-700 group-hover:scale-110" />
+            <Link
+              key={c.id + i}
+              to="/menu"
+              search={{ c: c.slug }}
+              aria-hidden={i >= data.categories.length}
+              className="group relative w-52 shrink-0 overflow-hidden rounded-2xl shadow-card sm:w-64"
+            >
+              <img
+                src={foodImage(c.image_key)}
+                alt={c.name}
+                loading="lazy"
+                width={816}
+                height={816}
+                className="aspect-square w-full object-cover transition duration-700 group-hover:scale-110"
+              />
               <div className="absolute inset-0 bg-gradient-to-t from-cocoa/90 via-cocoa/20 to-transparent" />
               <div className="absolute bottom-0 p-4 text-cocoa-foreground">
                 <div className="font-display text-xl font-semibold leading-tight">{c.name}</div>
@@ -239,14 +313,30 @@ function Home() {
       </div>
 
       <section className="relative mt-20 overflow-hidden">
-        <div className="absolute inset-0 -top-64 -bottom-64 bg-cover bg-center will-change-transform" style={{ backgroundImage: `url(${oven})`, transform: `translateY(${(y - 1300) * 0.15}px)` }} />
+        <div
+          className="absolute inset-0 -top-64 -bottom-64 bg-cover bg-center will-change-transform"
+          style={{
+            backgroundImage: `url(${oven})`,
+            transform: `translateY(${(y - 1300) * 0.15}px)`,
+          }}
+        />
         <div className="absolute inset-0 bg-cocoa/50" />
         <div className="relative mx-auto flex min-h-[520px] max-w-6xl items-center justify-center px-4 py-20">
-          <motion.div initial={{ opacity: 0, y: 40 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, amount: 0.4 }} transition={{ duration: 0.8 }} className="max-w-xl rounded-3xl border border-forest-foreground/25 bg-forest-foreground/10 p-8 text-center text-forest-foreground shadow-lift backdrop-blur-xl md:p-12">
+          <motion.div
+            initial={{ opacity: 0, y: 40 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, amount: 0.4 }}
+            transition={{ duration: 0.8 }}
+            className="max-w-xl rounded-3xl border border-forest-foreground/25 bg-forest-foreground/10 p-8 text-center text-forest-foreground shadow-lift backdrop-blur-xl md:p-12"
+          >
             <p className="eyebrow text-gold">Freshly Baked Every Morning</p>
             <h2 className="mt-3 text-4xl font-semibold md:text-5xl">From our oven to your door.</h2>
-            <p className="mt-4 text-lg opacity-90">Experience the magic of School of Hotel Management.</p>
-            <PillButton variant="gold" className="glow-hover mt-8"><Link to="/menu">Explore Combo Offers</Link></PillButton>
+            <p className="mt-4 text-lg opacity-90">
+              Experience the magic of School of Hotel Management.
+            </p>
+            <PillButton variant="gold" className="glow-hover mt-8">
+              <Link to="/menu">Explore Combo Offers</Link>
+            </PillButton>
           </motion.div>
         </div>
       </section>
@@ -256,13 +346,30 @@ function Home() {
       <section className="mx-auto max-w-6xl px-4 pt-20">
         <div className="grid gap-6 rounded-3xl bg-card p-8 shadow-card md:grid-cols-3">
           {[
-            { icon: Heart, t: "Made with love", d: "Every item is prepared fresh by our hospitality students." },
-            { icon: Bike, t: "Fair delivery", d: `From ${inr(s.delivery_slabs[0]?.fee ?? 0)} depending on distance — free above ${inr(s.free_delivery_threshold)}.` },
-            { icon: Store, t: "Pickup or delivery", d: "Pay online, cash on delivery, or pay at the café when you collect." },
+            {
+              icon: Heart,
+              t: "Made with love",
+              d: "Every item is prepared fresh by our hospitality students.",
+            },
+            {
+              icon: Bike,
+              t: "Fair delivery",
+              d: `From ${inr(s.delivery_slabs[0]?.fee ?? 0)} depending on distance — free above ${inr(s.free_delivery_threshold)}.`,
+            },
+            {
+              icon: Store,
+              t: "Pickup or delivery",
+              d: "Pay online, cash on delivery, or pay at the café when you collect.",
+            },
           ].map((f) => (
             <div key={f.t} className="flex gap-4">
-              <div className="grid size-12 shrink-0 place-items-center rounded-full bg-accent text-primary"><f.icon className="size-5" /></div>
-              <div><div className="font-display text-xl font-semibold">{f.t}</div><p className="text-sm text-muted-foreground">{f.d}</p></div>
+              <div className="grid size-12 shrink-0 place-items-center rounded-full bg-accent text-primary">
+                <f.icon className="size-5" />
+              </div>
+              <div>
+                <div className="font-display text-xl font-semibold">{f.t}</div>
+                <p className="text-sm text-muted-foreground">{f.d}</p>
+              </div>
             </div>
           ))}
         </div>

@@ -113,7 +113,10 @@
     color: var(--color-foreground);
     font-family: var(--font-sans);
   }
-  h1, h2, h3, h4 {
+  h1,
+  h2,
+  h3,
+  h4 {
     font-family: var(--font-display);
     letter-spacing: -0.01em;
   }
@@ -141,55 +144,319 @@
   height: 1px;
   background: linear-gradient(90deg, transparent, var(--gold), transparent);
 }
-@keyframes float-y { 0%,100% { transform: translateY(0) } 50% { transform: translateY(-6px) } }
-@utility animate-float { animation: float-y 3.5s ease-in-out infinite; }
-@utility bg-veg-tint { background-color: color-mix(in oklab, var(--success) 8%, var(--card)); }
-@keyframes draw { from { stroke-dashoffset: 60 } to { stroke-dashoffset: 0 } }
-@utility draw-icon { stroke-dasharray: 60; &:where(.group:hover *) { animation: draw 0.9s ease-out; } }
+@keyframes float-y {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-6px);
+  }
+}
+@utility animate-float {
+  animation: float-y 3.5s ease-in-out infinite;
+}
+@utility bg-veg-tint {
+  background-color: color-mix(in oklab, var(--success) 8%, var(--card));
+}
+@keyframes draw {
+  from {
+    stroke-dashoffset: 60;
+  }
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+@utility draw-icon {
+  stroke-dasharray: 60;
+  &:where(.group:hover *) {
+    animation: draw 0.9s ease-out;
+  }
+}
 
-@keyframes marquee { from { transform: translateX(0); } to { transform: translateX(-50%); } }
-.animate-marquee { animation: marquee 40s linear infinite; }
-.animate-marquee:hover { animation-play-state: paused; }
-.glow-hover { transition: box-shadow .4s ease, transform .4s ease; }
-.glow-hover:hover { box-shadow: 0 0 28px 4px color-mix(in oklab, var(--gold) 55%, transparent); transform: translateY(-2px); }
+@keyframes marquee {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+.animate-marquee {
+  animation: marquee 40s linear infinite;
+}
+.animate-marquee:hover {
+  animation-play-state: paused;
+}
+.glow-hover {
+  transition:
+    box-shadow 0.4s ease,
+    transform 0.4s ease;
+}
+.glow-hover:hover {
+  box-shadow: 0 0 28px 4px color-mix(in oklab, var(--gold) 55%, transparent);
+  transform: translateY(-2px);
+}
 
 /* Visit page */
-@utility bg-ivory-rich { background: radial-gradient(ellipse at top, color-mix(in oklab, var(--gold) 10%, var(--background)), var(--background) 60%); }
-.foil-text { background: linear-gradient(110deg, var(--cocoa) 0%, var(--gold) 30%, oklch(0.9 0.08 85) 45%, var(--gold) 60%, var(--cocoa) 100%); background-size: 250% 100%; background-position: 100% 0; -webkit-background-clip: text; background-clip: text; color: transparent; transition: background-position 1.6s ease; }
-.foil-text:hover { background-position: 0 0; }
-@keyframes doodle-float { 0%,100% { transform: translateY(0) rotate(0); opacity: .5 } 50% { transform: translateY(-12px) rotate(8deg); opacity: 1 } }
-.doodle { animation: doodle-float 7s ease-in-out infinite; }
-@keyframes fleck-fall { from { transform: translateY(-5vh); opacity: 0 } 10% { opacity: .9 } to { transform: translateY(110vh) translateX(30px); opacity: 0 } }
-.fleck { position: absolute; top: 0; width: 4px; height: 4px; border-radius: 9999px; background: var(--gold); box-shadow: 0 0 6px var(--gold); animation: fleck-fall 11s linear infinite; }
-@keyframes vine-grow { from { stroke-dasharray: 600; stroke-dashoffset: 600; opacity: 0 } to { stroke-dasharray: 600; stroke-dashoffset: 0; opacity: 1 } }
-@keyframes vine-sway { 0%,100% { rotate: 0deg } 50% { rotate: 2deg } }
-.vine { animation: vine-grow 2.4s ease-out both, vine-sway 6s ease-in-out 2.4s infinite; transform-origin: bottom right; }
-@keyframes steam-rise { from { transform: translateY(0) scaleY(.6); opacity: .7 } to { transform: translateY(-14px) scaleY(1.2); opacity: 0 } }
-.steam { width: 2px; height: 10px; border-radius: 9999px; background: var(--muted-foreground); animation: steam-rise 2s ease-out infinite; }
-@keyframes twinkle { 0%,100% { opacity: .3; transform: scale(.8) } 50% { opacity: 1; transform: scale(1.2) } }
-.sparkle { display: inline-block; animation: twinkle 2.2s ease-in-out infinite; }
-@keyframes tick { 0%,90%,100% { rotate: 0deg } 95% { rotate: 12deg } }
-.tick { animation: tick 1s steps(1) infinite, tick 1s ease infinite; }
-.glass-card { background: linear-gradient(var(--card), var(--card)) padding-box, linear-gradient(135deg, color-mix(in oklab, var(--gold) 80%, transparent), transparent 50%, color-mix(in oklab, var(--gold) 60%, transparent)) border-box; border: 1px solid transparent; background-color: color-mix(in oklab, var(--card) 70%, transparent); backdrop-filter: blur(12px); box-shadow: var(--shadow-card); }
-.bubble-btn { box-shadow: 0 0 0 0 color-mix(in oklab, var(--gold) 50%, transparent); }
-.bubble-btn:hover { box-shadow: 0 0 22px 2px color-mix(in oklab, var(--success) 50%, transparent); }
-.shimmer-btn { position: relative; overflow: hidden; }
-.shimmer-btn::after { content: ""; position: absolute; inset: 0; background: linear-gradient(110deg, transparent 30%, oklch(1 0 0 / .5) 50%, transparent 70%); transform: translateX(-100%); transition: transform .9s ease; }
-.shimmer-btn:hover::after { transform: translateX(100%); }
-.map-frame { background: var(--gradient-gold); box-shadow: 0 0 40px -6px color-mix(in oklab, var(--gold) 60%, transparent); }
-@keyframes pin-bob { 0%,100% { transform: translateY(0) } 50% { transform: translateY(-6px) } }
-.pin { animation: pin-bob 2s ease-in-out infinite; }
-.nav-glow::after { box-shadow: 0 0 8px var(--gold); }
-.social-glow { transition: all .5s ease; }
-.social-glow:hover { color: var(--gold); text-shadow: 0 0 12px var(--gold); transform: translateY(-2px); }
+@utility bg-ivory-rich {
+  background: radial-gradient(
+    ellipse at top,
+    color-mix(in oklab, var(--gold) 10%, var(--background)),
+    var(--background) 60%
+  );
+}
+.foil-text {
+  background: linear-gradient(
+    110deg,
+    var(--cocoa) 0%,
+    var(--gold) 30%,
+    oklch(0.9 0.08 85) 45%,
+    var(--gold) 60%,
+    var(--cocoa) 100%
+  );
+  background-size: 250% 100%;
+  background-position: 100% 0;
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  transition: background-position 1.6s ease;
+}
+.foil-text:hover {
+  background-position: 0 0;
+}
+@keyframes doodle-float {
+  0%,
+  100% {
+    transform: translateY(0) rotate(0);
+    opacity: 0.5;
+  }
+  50% {
+    transform: translateY(-12px) rotate(8deg);
+    opacity: 1;
+  }
+}
+.doodle {
+  animation: doodle-float 7s ease-in-out infinite;
+}
+@keyframes fleck-fall {
+  from {
+    transform: translateY(-5vh);
+    opacity: 0;
+  }
+  10% {
+    opacity: 0.9;
+  }
+  to {
+    transform: translateY(110vh) translateX(30px);
+    opacity: 0;
+  }
+}
+.fleck {
+  position: absolute;
+  top: 0;
+  width: 4px;
+  height: 4px;
+  border-radius: 9999px;
+  background: var(--gold);
+  box-shadow: 0 0 6px var(--gold);
+  animation: fleck-fall 11s linear infinite;
+}
+@keyframes vine-grow {
+  from {
+    stroke-dasharray: 600;
+    stroke-dashoffset: 600;
+    opacity: 0;
+  }
+  to {
+    stroke-dasharray: 600;
+    stroke-dashoffset: 0;
+    opacity: 1;
+  }
+}
+@keyframes vine-sway {
+  0%,
+  100% {
+    rotate: 0deg;
+  }
+  50% {
+    rotate: 2deg;
+  }
+}
+.vine {
+  animation:
+    vine-grow 2.4s ease-out both,
+    vine-sway 6s ease-in-out 2.4s infinite;
+  transform-origin: bottom right;
+}
+@keyframes steam-rise {
+  from {
+    transform: translateY(0) scaleY(0.6);
+    opacity: 0.7;
+  }
+  to {
+    transform: translateY(-14px) scaleY(1.2);
+    opacity: 0;
+  }
+}
+.steam {
+  width: 2px;
+  height: 10px;
+  border-radius: 9999px;
+  background: var(--muted-foreground);
+  animation: steam-rise 2s ease-out infinite;
+}
+@keyframes twinkle {
+  0%,
+  100% {
+    opacity: 0.3;
+    transform: scale(0.8);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.2);
+  }
+}
+.sparkle {
+  display: inline-block;
+  animation: twinkle 2.2s ease-in-out infinite;
+}
+@keyframes tick {
+  0%,
+  90%,
+  100% {
+    rotate: 0deg;
+  }
+  95% {
+    rotate: 12deg;
+  }
+}
+.tick {
+  animation:
+    tick 1s steps(1) infinite,
+    tick 1s ease infinite;
+}
+.glass-card {
+  background:
+    linear-gradient(var(--card), var(--card)) padding-box,
+    linear-gradient(
+        135deg,
+        color-mix(in oklab, var(--gold) 80%, transparent),
+        transparent 50%,
+        color-mix(in oklab, var(--gold) 60%, transparent)
+      )
+      border-box;
+  border: 1px solid transparent;
+  background-color: color-mix(in oklab, var(--card) 70%, transparent);
+  backdrop-filter: blur(12px);
+  box-shadow: var(--shadow-card);
+}
+.bubble-btn {
+  box-shadow: 0 0 0 0 color-mix(in oklab, var(--gold) 50%, transparent);
+}
+.bubble-btn:hover {
+  box-shadow: 0 0 22px 2px color-mix(in oklab, var(--success) 50%, transparent);
+}
+.shimmer-btn {
+  position: relative;
+  overflow: hidden;
+}
+.shimmer-btn::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(110deg, transparent 30%, oklch(1 0 0 / 0.5) 50%, transparent 70%);
+  transform: translateX(-100%);
+  transition: transform 0.9s ease;
+}
+.shimmer-btn:hover::after {
+  transform: translateX(100%);
+}
+.map-frame {
+  background: var(--gradient-gold);
+  box-shadow: 0 0 40px -6px color-mix(in oklab, var(--gold) 60%, transparent);
+}
+@keyframes pin-bob {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-6px);
+  }
+}
+.pin {
+  animation: pin-bob 2s ease-in-out infinite;
+}
+.nav-glow::after {
+  box-shadow: 0 0 8px var(--gold);
+}
+.social-glow {
+  transition: all 0.5s ease;
+}
+.social-glow:hover {
+  color: var(--gold);
+  text-shadow: 0 0 12px var(--gold);
+  transform: translateY(-2px);
+}
 
 /* Story page */
-@keyframes sway-k { 0%,100% { rotate: -6deg } 50% { rotate: 6deg } }
-.sway { animation: sway-k 3s ease-in-out infinite; transform-origin: bottom center; }
-.glow-title { text-shadow: 0 0 24px color-mix(in oklab, var(--gold) 45%, transparent); transition: text-shadow .5s ease; }
-.glow-title:hover { text-shadow: 0 0 40px color-mix(in oklab, var(--gold) 80%, transparent); }
-@keyframes thread-flow { from { background-position: 0 0 } to { background-position: 0 24px } }
-.thread { background-image: linear-gradient(var(--gold) 50%, transparent 50%); background-size: 1px 12px; animation: thread-flow 1.2s linear infinite; }
-.promise-card { background: linear-gradient(var(--forest), var(--forest)) padding-box, linear-gradient(135deg, var(--gold), transparent 40%, var(--gold)) border-box; border: 2px solid transparent; background-image: linear-gradient(150deg, color-mix(in oklab, var(--forest) 92%, transparent), color-mix(in oklab, var(--gold) 45%, var(--forest))), linear-gradient(135deg, var(--gold), transparent 40%, var(--gold)); background-origin: border-box; background-clip: padding-box, border-box; box-shadow: 0 30px 60px -25px color-mix(in oklab, var(--forest) 70%, transparent); }
-.cta-emerald { background: linear-gradient(135deg, var(--success), var(--forest)); border: 1px solid var(--gold); box-shadow: 0 0 18px -2px color-mix(in oklab, var(--gold) 55%, transparent); }
-.cta-emerald:hover { box-shadow: 0 0 34px 2px color-mix(in oklab, var(--gold) 70%, transparent), 24px 0 30px -12px var(--gold); }
+@keyframes sway-k {
+  0%,
+  100% {
+    rotate: -6deg;
+  }
+  50% {
+    rotate: 6deg;
+  }
+}
+.sway {
+  animation: sway-k 3s ease-in-out infinite;
+  transform-origin: bottom center;
+}
+.glow-title {
+  text-shadow: 0 0 24px color-mix(in oklab, var(--gold) 45%, transparent);
+  transition: text-shadow 0.5s ease;
+}
+.glow-title:hover {
+  text-shadow: 0 0 40px color-mix(in oklab, var(--gold) 80%, transparent);
+}
+@keyframes thread-flow {
+  from {
+    background-position: 0 0;
+  }
+  to {
+    background-position: 0 24px;
+  }
+}
+.thread {
+  background-image: linear-gradient(var(--gold) 50%, transparent 50%);
+  background-size: 1px 12px;
+  animation: thread-flow 1.2s linear infinite;
+}
+.promise-card {
+  background:
+    linear-gradient(var(--forest), var(--forest)) padding-box,
+    linear-gradient(135deg, var(--gold), transparent 40%, var(--gold)) border-box;
+  border: 2px solid transparent;
+  background-image:
+    linear-gradient(
+      150deg,
+      color-mix(in oklab, var(--forest) 92%, transparent),
+      color-mix(in oklab, var(--gold) 45%, var(--forest))
+    ),
+    linear-gradient(135deg, var(--gold), transparent 40%, var(--gold));
+  background-origin: border-box;
+  background-clip: padding-box, border-box;
+  box-shadow: 0 30px 60px -25px color-mix(in oklab, var(--forest) 70%, transparent);
+}
+.cta-emerald {
+  background: linear-gradient(135deg, var(--success), var(--forest));
+  border: 1px solid var(--gold);
+  box-shadow: 0 0 18px -2px color-mix(in oklab, var(--gold) 55%, transparent);
+}
+.cta-emerald:hover {
+  box-shadow:
+    0 0 34px 2px color-mix(in oklab, var(--gold) 70%, transparent),
+    24px 0 30px -12px var(--gold);
+}

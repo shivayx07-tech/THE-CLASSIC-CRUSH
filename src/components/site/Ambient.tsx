@@ -20,14 +20,40 @@ export function Ambient({ count = 14 }: { count?: number }) {
   }, []);
   return (
     <>
-      <div aria-hidden className="pointer-events-none absolute inset-0" style={{ transform: `translateY(${y * 0.15}px)` }}>
+      <div
+        aria-hidden
+        className="pointer-events-none absolute inset-0"
+        style={{ transform: `translateY(${y * 0.15}px)` }}
+      >
         {Array.from({ length: count }).map((_, i) => (
-          <svg key={i} viewBox="0 0 16 16" className="doodle absolute size-9 stroke-primary/25" style={{ left: `${(i * 37 + 7) % 94}%`, top: `${(i * 61 + 5) % 96}%`, animationDelay: `${i * 0.7}s` }} fill="none" strokeWidth={1} strokeLinecap="round"><path d={doodles[i % doodles.length]} /></svg>
+          <svg
+            key={i}
+            viewBox="0 0 16 16"
+            className="doodle absolute size-9 stroke-primary/25"
+            style={{
+              left: `${(i * 37 + 7) % 94}%`,
+              top: `${(i * 61 + 5) % 96}%`,
+              animationDelay: `${i * 0.7}s`,
+            }}
+            fill="none"
+            strokeWidth={1}
+            strokeLinecap="round"
+          >
+            <path d={doodles[i % doodles.length]} />
+          </svg>
         ))}
       </div>
       <div aria-hidden className="pointer-events-none absolute inset-0">
         {Array.from({ length: 22 }).map((_, i) => (
-          <span key={i} className="fleck" style={{ left: `${(i * 53) % 100}%`, animationDelay: `${(i * 1.3) % 9}s`, animationDuration: `${9 + (i % 5) * 2}s` }} />
+          <span
+            key={i}
+            className="fleck"
+            style={{
+              left: `${(i * 53) % 100}%`,
+              animationDelay: `${(i * 1.3) % 9}s`,
+              animationDuration: `${9 + (i % 5) * 2}s`,
+            }}
+          />
         ))}
       </div>
       <Vine className="-bottom-6 -right-6 size-56 md:size-80" />
@@ -38,10 +64,21 @@ export function Ambient({ count = 14 }: { count?: number }) {
 
 export function Vine({ className = "" }: { className?: string }) {
   return (
-    <svg aria-hidden viewBox="0 0 200 200" className={`vine pointer-events-none absolute fill-none stroke-primary/50 ${className}`} strokeWidth={1.5}>
+    <svg
+      aria-hidden
+      viewBox="0 0 200 200"
+      className={`vine pointer-events-none absolute fill-none stroke-primary/50 ${className}`}
+      strokeWidth={1.5}
+    >
       <path d="M200 200C160 160 150 120 160 70S120 10 90 0" />
-      <path className="fill-primary/20" d="M160 120c-20-5-30-20-25-35 15 5 25 18 25 35zM120 35c-18 2-30-8-32-22 16-2 28 8 32 22z" />
-      <path className="fill-gold/30 stroke-gold/60" d="M155 80c15-12 32-10 40 0-12 10-28 10-40 0z" />
+      <path
+        className="fill-primary/20"
+        d="M160 120c-20-5-30-20-25-35 15 5 25 18 25 35zM120 35c-18 2-30-8-32-22 16-2 28 8 32 22z"
+      />
+      <path
+        className="fill-gold/30 stroke-gold/60"
+        d="M155 80c15-12 32-10 40 0-12 10-28 10-40 0z"
+      />
     </svg>
   );
 }

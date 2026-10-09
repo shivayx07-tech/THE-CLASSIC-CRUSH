@@ -83,7 +83,11 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
       { title: "The Classic Crush — Bakery & Café" },
-      { name: "description", content: "Order desserts, quick bites and beverages online from The Classic Crush. Made with love." },
+      {
+        name: "description",
+        content:
+          "Order desserts, quick bites and beverages online from The Classic Crush. Made with love.",
+      },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
     ],

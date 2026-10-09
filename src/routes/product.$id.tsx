@@ -21,7 +21,10 @@ export const Route = createFileRoute("/product/$id")({
     meta: loaderData
       ? [
           { title: `${loaderData.name} — The Classic Crush` },
-          { name: "description", content: loaderData.description ?? "Order online from The Classic Crush" },
+          {
+            name: "description",
+            content: loaderData.description ?? "Order online from The Classic Crush",
+          },
           { property: "og:title", content: `${loaderData.name} — The Classic Crush` },
           { property: "og:description", content: loaderData.description ?? "Order online" },
         ]
@@ -30,7 +33,9 @@ export const Route = createFileRoute("/product/$id")({
   notFoundComponent: () => (
     <div className="py-24 text-center">
       <h1 className="text-3xl">This dish isn't on the menu</h1>
-      <Link to="/menu" className="mt-4 inline-block text-primary">Back to menu</Link>
+      <Link to="/menu" className="mt-4 inline-block text-primary">
+        Back to menu
+      </Link>
     </div>
   ),
   component: ProductPage,
@@ -41,7 +46,9 @@ function ProductPage() {
   const { data } = useSuspenseQuery(menuQuery);
   const p = data.products.find((x) => x.id === id)!;
   const cat = data.categories.find((c) => c.id === p.category_id);
-  const related = data.products.filter((x) => x.category_id === p.category_id && x.id !== p.id).slice(0, 4);
+  const related = data.products
+    .filter((x) => x.category_id === p.category_id && x.id !== p.id)
+    .slice(0, 4);
   const [qty, setQty] = useState(1);
   const cart = useCart();
   const navigate = useNavigate();
@@ -54,42 +61,91 @@ function ProductPage() {
 
   return (
     <div className="mx-auto max-w-6xl px-4 py-10">
-      <Link to="/menu" className="mb-6 inline-flex items-center gap-1 text-sm text-muted-foreground hover:text-foreground"><ArrowLeft className="size-4" /> Menu</Link>
+      <Link
+        to="/menu"
+        className="mb-6 inline-flex items-center gap-1 text-sm text-muted-foreground hover:text-foreground"
+      >
+        <ArrowLeft className="size-4" /> Menu
+      </Link>
       <div className="grid gap-10 md:grid-cols-2">
-        <img src={foodImage(p.image_key)} alt={p.name} width={816} height={816} className="aspect-square w-full rounded-3xl object-cover shadow-lift" />
+        <img
+          src={foodImage(p.image_key)}
+          alt={p.name}
+          width={816}
+          height={816}
+          className="aspect-square w-full rounded-3xl object-cover shadow-lift"
+        />
         <div className="flex flex-col gap-4">
-          <p className="eyebrow text-gold">{cat?.name}{p.subgroup ? ` · ${p.subgroup}` : ""}</p>
+          <p className="eyebrow text-gold">
+            {cat?.name}
+            {p.subgroup ? ` · ${p.subgroup}` : ""}
+          </p>
           <h1 className="text-5xl font-semibold leading-tight">{p.name}</h1>
           <div className="flex items-center gap-3">
-            {p.is_veg && <span className="flex items-center gap-1.5 text-sm text-success"><VegMark /> Vegetarian</span>}
-            {p.is_bestseller && <span className="rounded-full bg-gold-gradient px-2.5 py-0.5 text-xs font-bold text-gold-foreground">BEST SELLER</span>}
+            {p.is_veg && (
+              <span className="flex items-center gap-1.5 text-sm text-success">
+                <VegMark /> Vegetarian
+              </span>
+            )}
+            {p.is_bestseller && (
+              <span className="rounded-full bg-gold-gradient px-2.5 py-0.5 text-xs font-bold text-gold-foreground">
+                BEST SELLER
+              </span>
+            )}
           </div>
           <p className="text-lg text-muted-foreground">{p.description}</p>
-          <div className="text-3xl font-bold text-cocoa">{inr(p.price)} {p.unit && <span className="text-base font-normal text-muted-foreground">{p.unit}</span>}</div>
+          <div className="text-3xl font-bold text-cocoa">
+            {inr(p.price)}{" "}
+            {p.unit && (
+              <span className="text-base font-normal text-muted-foreground">{p.unit}</span>
+            )}
+          </div>
           {p.is_available ? (
             <>
               <div className="flex items-center gap-4">
                 <div className="flex items-center gap-3 rounded-full border bg-card p-1">
-                  <button aria-label="Decrease" className="grid size-10 place-items-center rounded-full hover:bg-accent" onClick={() => setQty(Math.max(1, qty - 1))}><Minus className="size-4" /></button>
+                  <button
+                    aria-label="Decrease"
+                    className="grid size-10 place-items-center rounded-full hover:bg-accent"
+                    onClick={() => setQty(Math.max(1, qty - 1))}
+                  >
+                    <Minus className="size-4" />
+                  </button>
                   <span className="w-6 text-center text-lg font-bold">{qty}</span>
-                  <button aria-label="Increase" className="grid size-10 place-items-center rounded-full hover:bg-accent" onClick={() => setQty(Math.min(20, qty + 1))}><Plus className="size-4" /></button>
+                  <button
+                    aria-label="Increase"
+                    className="grid size-10 place-items-center rounded-full hover:bg-accent"
+                    onClick={() => setQty(Math.min(20, qty + 1))}
+                  >
+                    <Plus className="size-4" />
+                  </button>
                 </div>
                 <span className="text-muted-foreground">Total {inr(qty * p.price)}</span>
               </div>
               <div className="flex flex-wrap gap-3">
-                <Button size="lg" onClick={() => add(false)}>Add to cart</Button>
-                <Button size="lg" variant="gold" onClick={() => add(true)}>Buy now</Button>
+                <Button size="lg" onClick={() => add(false)}>
+                  Add to cart
+                </Button>
+                <Button size="lg" variant="gold" onClick={() => add(true)}>
+                  Buy now
+                </Button>
               </div>
             </>
           ) : (
-            <p className="rounded-xl bg-muted p-4 text-muted-foreground">Sold out for today. Please check back tomorrow!</p>
+            <p className="rounded-xl bg-muted p-4 text-muted-foreground">
+              Sold out for today. Please check back tomorrow!
+            </p>
           )}
         </div>
       </div>
       {related.length > 0 && (
         <section className="mt-16">
           <h2 className="mb-5 text-3xl font-semibold">You may also like</h2>
-          <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-4">{related.map((r) => <ProductCard key={r.id} p={r} />)}</div>
+          <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
+            {related.map((r) => (
+              <ProductCard key={r.id} p={r} />
+            ))}
+          </div>
         </section>
       )}
     </div>

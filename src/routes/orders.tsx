@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { useQuery } from "@tanstack/react-query";
 import { useServerFn } from "@tanstack/react-start";
@@ -41,7 +42,9 @@ function OrdersPage() {
         <div className="rounded-2xl bg-card p-10 text-center shadow-card">
           <Receipt className="mx-auto size-10 text-gold" />
           <p className="mt-3">No orders yet.</p>
-          <Button asChild variant="gold" className="mt-4"><Link to="/menu">Start an order</Link></Button>
+          <Button asChild variant="gold" className="mt-4">
+            <Link to="/menu">Start an order</Link>
+          </Button>
         </div>
       )}
       <div className="space-y-4">
@@ -50,16 +53,46 @@ function OrdersPage() {
             <div className="flex flex-wrap items-center justify-between gap-2">
               <div>
                 <div className="font-display text-xl font-semibold">#{o.order_number}</div>
-                <div className="text-xs text-muted-foreground">{new Date(o.created_at).toLocaleString("en-IN")} · {o.fulfillment}</div>
+                <div className="text-xs text-muted-foreground">
+                  {new Date(o.created_at).toLocaleString("en-IN")} · {o.fulfillment}
+                </div>
               </div>
-              <span className="rounded-full bg-accent px-3 py-1 text-xs font-semibold">{STATUS_LABEL[o.status]}</span>
+              <span className="rounded-full bg-accent px-3 py-1 text-xs font-semibold">
+                {STATUS_LABEL[o.status]}
+              </span>
             </div>
-            <p className="mt-3 text-sm text-muted-foreground">{o.order_items.map((i) => `${i.quantity}× ${i.name}`).join(", ")}</p>
+            <p className="mt-3 text-sm text-muted-foreground">
+              {o.order_items.map((i: any) => `${i.quantity}× ${i.name}`).join(", ")}
+            </p>
             <div className="mt-4 flex items-center justify-between">
               <span className="font-bold">{inr(Number(o.total))}</span>
               <div className="flex gap-2">
-                <Button size="sm" variant="outline" onClick={() => o.order_items.forEach((i) => i.product_id && cart.add({ productId: i.product_id, name: i.name, price: Number(i.unit_price), imageKey: null }, i.quantity))}>Reorder</Button>
-                <Button size="sm" asChild><Link to="/order/$token" params={{ token: o.tracking_token }}>Track</Link></Button>
+                <Button
+                  size="sm"
+                  variant="outline"
+                  onClick={() =>
+                    o.order_items.forEach(
+                      (i: any) =>
+                        i.product_id &&
+                        cart.add(
+                          {
+                            productId: i.product_id,
+                            name: i.name,
+                            price: Number(i.unit_price),
+                            imageKey: null,
+                          },
+                          i.quantity,
+                        ),
+                    )
+                  }
+                >
+                  Reorder
+                </Button>
+                <Button size="sm" asChild>
+                  <Link to="/order/$token" params={{ token: o.tracking_token }}>
+                    Track
+                  </Link>
+                </Button>
               </div>
             </div>
           </div>

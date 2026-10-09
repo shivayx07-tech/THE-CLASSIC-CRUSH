@@ -10,14 +10,17 @@ export type PricingSettings = {
 };
 
 export type DeliveryQuote =
-  | { ok: true; fee: number; free: boolean }
-  | { ok: false; reason: "out_of_range" };
+  { ok: true; fee: number; free: boolean } | { ok: false; reason: "out_of_range" };
 
 export function round2(n: number) {
   return Math.round(n * 100) / 100;
 }
 
-export function quoteDelivery(distanceKm: number, subtotal: number, s: PricingSettings): DeliveryQuote {
+export function quoteDelivery(
+  distanceKm: number,
+  subtotal: number,
+  s: PricingSettings,
+): DeliveryQuote {
   if (distanceKm > Number(s.max_radius_km)) return { ok: false, reason: "out_of_range" };
   const slabs = [...s.delivery_slabs].sort((a, b) => a.max_km - b.max_km);
   const slab = slabs.find((x) => distanceKm <= Number(x.max_km));
@@ -47,7 +50,13 @@ export function computeTotals(
       else deliveryFee = q.fee;
     }
   }
-  return { subtotal: round2(subtotal), tax, deliveryFee, total: round2(subtotal + tax + deliveryFee), error };
+  return {
+    subtotal: round2(subtotal),
+    tax,
+    deliveryFee,
+    total: round2(subtotal + tax + deliveryFee),
+    error,
+  };
 }
 
 export const inr = (n: number) =>

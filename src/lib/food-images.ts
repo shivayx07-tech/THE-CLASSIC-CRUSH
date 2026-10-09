@@ -24,9 +24,31 @@ import d_sprinkle from "@/assets/food/d-sprinkle.jpg";
 import d_milk from "@/assets/food/d-milk.jpg";
 
 const map: Record<string, string> = {
-  desserts, patties, quickbites: patties, pizza, sandwich, maggie, tea, beverages,
-  mojito, pastries,
-  "d-nutella": d_nutella, "d-triple": d_triple, "d-gems": d_gems, "d-heart": d_heart, "d-kitkat": d_kitkat, "d-dark": d_dark, "d-oreo": d_oreo, "d-darkmilk": d_darkmilk, "d-darkwhite": d_darkwhite, "d-sprinkle": d_sprinkle, "d-milk": d_milk, cake, burger, fries, momos,
+  desserts,
+  patties,
+  quickbites: patties,
+  pizza,
+  sandwich,
+  maggie,
+  tea,
+  beverages,
+  mojito,
+  pastries,
+  "d-nutella": d_nutella,
+  "d-triple": d_triple,
+  "d-gems": d_gems,
+  "d-heart": d_heart,
+  "d-kitkat": d_kitkat,
+  "d-dark": d_dark,
+  "d-oreo": d_oreo,
+  "d-darkmilk": d_darkmilk,
+  "d-darkwhite": d_darkwhite,
+  "d-sprinkle": d_sprinkle,
+  "d-milk": d_milk,
+  cake,
+  burger,
+  fries,
+  momos,
 };
 
 /** image_key from the database → bundled photo; URLs pass through unchanged. */
