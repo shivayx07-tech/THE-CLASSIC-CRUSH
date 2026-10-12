@@ -94,7 +94,7 @@ function ProductPage() {
             )}
           </div>
           <p className="text-lg text-muted-foreground">{p.description}</p>
-          <div className="text-3xl font-bold text-cocoa">
+          <div className="text-3xl font-bold text-primary">
             {inr(p.price)}{" "}
             {p.unit && (
               <span className="text-base font-normal text-muted-foreground">{p.unit}</span>

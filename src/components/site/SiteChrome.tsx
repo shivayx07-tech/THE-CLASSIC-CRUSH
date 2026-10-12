@@ -29,14 +29,14 @@ export function SiteHeader() {
   return (
     <header
       className={cn(
-        "sticky top-0 z-40 border-b transition-all duration-500",
+        "sticky top-0 z-40 border-b transition-all duration-500 backdrop-blur-md",
         scrolled
-          ? "border-border/70 bg-background/70 shadow-card backdrop-blur-xl"
-          : "border-transparent bg-background",
+          ? "border-border/80 bg-background/85 shadow-card backdrop-blur-xl py-0.5"
+          : "border-border/40 bg-background/90",
       )}
     >
       <div className="mx-auto flex h-16 max-w-6xl items-center justify-between gap-4 px-4">
-        <Link to="/">
+        <Link to="/" className="transition-opacity duration-300 hover:opacity-95">
           <Logo />
         </Link>
         <nav className="hidden items-center gap-7 md:flex">
@@ -44,7 +44,7 @@ export function SiteHeader() {
             <Link
               key={n.to}
               to={n.to}
-              className="relative text-sm font-medium text-muted-foreground transition-colors after:absolute after:-bottom-1 after:left-0 after:h-px after:w-0 after:bg-gold after:transition-all hover:text-foreground hover:after:w-full"
+              className="relative py-1 text-sm font-semibold tracking-wide text-muted-foreground transition-all duration-300 hover:text-primary after:absolute after:-bottom-1.5 after:left-0 after:h-0.5 after:w-0 after:rounded-full after:bg-gold after:transition-all after:duration-300 hover:after:w-full"
               activeProps={{ className: "!text-primary after:!w-full nav-glow" }}
               activeOptions={{ exact: n.to === "/" }}
             >
@@ -55,7 +55,7 @@ export function SiteHeader() {
         <div className="flex items-center gap-2">
           <Link
             to="/cart"
-            className="relative inline-flex h-10 items-center gap-2 rounded-full bg-primary px-4 text-sm font-semibold text-primary-foreground transition hover:-translate-y-0.5 hover:shadow-lift"
+            className="relative inline-flex h-10 items-center gap-2 rounded-full border border-gold/30 bg-primary px-4.5 text-sm font-semibold text-primary-foreground shadow-sm transition-all duration-300 hover:-translate-y-0.5 hover:shadow-lift hover:brightness-110"
             aria-label="Cart"
           >
             <ShoppingBag className="size-4" />

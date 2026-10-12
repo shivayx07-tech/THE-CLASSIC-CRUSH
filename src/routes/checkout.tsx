@@ -288,7 +288,7 @@ function Checkout() {
         </Section>
       </div>
 
-      <aside className="h-fit space-y-3 rounded-2xl bg-card p-6 shadow-card lg:sticky lg:top-24">
+      <aside className="h-fit space-y-4 rounded-3xl border border-border/80 bg-card p-6 md:p-8 shadow-card lg:sticky lg:top-24">
         <h2 className="text-2xl font-semibold">Order summary</h2>
         <div className="max-h-56 space-y-2 overflow-y-auto text-sm">
           {cart.items.map((i) => (
@@ -371,9 +371,9 @@ function Checkout() {
 
 function Section({ n, title, children }: { n: number; title: string; children: React.ReactNode }) {
   return (
-    <section className="rounded-2xl bg-card p-6 shadow-card">
+    <section className="rounded-3xl border border-border/80 bg-card p-6 shadow-card transition-all duration-300 md:p-8 hover:shadow-lift">
       <h2 className="mb-4 flex items-center gap-3 text-2xl font-semibold">
-        <span className="grid size-8 place-items-center rounded-full bg-primary font-sans text-sm text-primary-foreground">
+        <span className="grid size-8 place-items-center rounded-full bg-primary font-sans text-sm font-bold text-primary-foreground shadow-sm">
           {n}
         </span>
         {title}
@@ -417,11 +417,13 @@ function Choice({
       type="button"
       onClick={onClick}
       className={cn(
-        "flex items-center gap-3 rounded-xl border-2 p-4 text-left transition",
-        active ? "border-primary bg-primary/5" : "border-border hover:border-primary/50",
+        "flex items-center gap-3 rounded-2xl border-2 p-4 text-left transition duration-300",
+        active
+          ? "border-primary bg-primary/5 text-primary shadow-sm"
+          : "border-border/80 bg-card hover:border-gold/60 hover:bg-gold/5",
       )}
     >
-      <Icon className={cn("size-5", active ? "text-primary" : "text-muted-foreground")} />
+      <Icon className={cn("size-5 transition-colors duration-300", active ? "text-primary" : "text-muted-foreground")} />
       <div>
         <div className="font-semibold">{title}</div>
         {sub && <div className="text-xs text-muted-foreground">{sub}</div>}

@@ -75,7 +75,7 @@ function OrderPage() {
         </div>
       )}
       <div className="grid gap-6 md:grid-cols-[1fr_340px]">
-        <div className="rounded-2xl bg-card p-6 shadow-card">
+        <div className="rounded-3xl border border-border/80 bg-card p-6 shadow-card">
           <div className="mb-6 flex flex-wrap items-start justify-between gap-2">
             <div>
               <p className="eyebrow text-gold">Order #{o.order_number}</p>
@@ -95,7 +95,7 @@ function OrderPage() {
           </div>
           <OrderTimeline status={o.status} fulfillment={o.fulfillment} events={o.order_events} />
           {o.delivery_partner && (
-            <div className="mt-6 rounded-xl bg-accent p-4 text-sm">
+            <div className="mt-6 rounded-2xl bg-accent p-4 text-sm">
               Your delivery partner: <b>{o.delivery_partner}</b>
               {o.delivery_partner_phone && (
                 <a
@@ -110,7 +110,7 @@ function OrderPage() {
           )}
           <p className="mt-6 text-xs text-muted-foreground">This page refreshes automatically.</p>
         </div>
-        <aside className="space-y-3 rounded-2xl bg-card p-6 text-sm shadow-card">
+        <aside className="space-y-4 rounded-3xl border border-border/80 bg-card p-6 text-sm shadow-card">
           <h3 className="text-xl font-semibold">Details</h3>
           {o.order_items.map((i: any) => (
             <div key={i.id} className="flex justify-between">

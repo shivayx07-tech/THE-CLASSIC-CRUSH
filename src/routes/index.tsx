@@ -207,22 +207,22 @@ function Home() {
             transition={{ opacity: { duration: 1.4 }, scale: { duration: 6, ease: "linear" } }}
           />
         </AnimatePresence>
-        <div className="absolute inset-0 bg-gradient-to-r from-forest/95 via-forest/60 to-forest/10" />
-        <div className="absolute inset-0 bg-gradient-to-t from-forest/90 via-transparent to-forest/40" />
+        <div className="absolute inset-0 bg-gradient-to-r from-[#0e3a23]/95 via-[#0e3a23]/75 to-[#0e3a23]/30" />
+        <div className="absolute inset-0 bg-gradient-to-t from-[#0e3a23]/95 via-transparent to-[#0e3a23]/50" />
         <div className="absolute bottom-6 left-1/2 z-10 flex -translate-x-1/2 gap-2">
           {slides.map((_, i) => (
             <button
               key={i}
               aria-label={`Slide ${i + 1}`}
               onClick={() => setSlide(i)}
-              className={`h-1.5 rounded-full transition-all ${i === slide ? "w-8 bg-gold" : "w-3 bg-forest-foreground/50"}`}
+              className={`h-1.5 rounded-full transition-all duration-300 ${i === slide ? "w-8 bg-gold" : "w-3 bg-forest-foreground/50"}`}
             />
           ))}
         </div>
         <div className="relative mx-auto grid max-w-6xl items-center gap-10 px-4 py-14 md:min-h-[640px] md:grid-cols-2 md:py-24">
           <div className="space-y-6">
             <Reveal>
-              <span className="animate-float inline-flex items-center gap-2 rounded-full border border-gold/50 bg-forest-foreground/10 px-4 py-1.5 text-xs font-semibold uppercase tracking-[0.2em] text-gold backdrop-blur">
+              <span className="animate-float inline-flex items-center gap-2 rounded-full border border-gold/60 bg-forest-foreground/10 px-4.5 py-1.5 text-xs font-semibold uppercase tracking-[0.22em] text-gold backdrop-blur-md">
                 <Leaf className="size-3.5" /> 100% Pure Vegetarian
               </span>
             </Reveal>
@@ -232,7 +232,9 @@ function Home() {
               </h1>
             </Reveal>
             <Reveal delay={200}>
-              <p className="font-script text-4xl text-gold md:text-5xl">Made with Love</p>
+              <p className="font-script text-4xl text-gold md:text-6xl drop-shadow-[0_2px_14px_rgba(212,175,55,0.45)]">
+                Made with Love
+              </p>
             </Reveal>
             <Reveal delay={300}>
               <p className="max-w-md text-lg opacity-85">
@@ -241,10 +243,10 @@ function Home() {
               </p>
             </Reveal>
             <Reveal delay={400} className="flex flex-wrap gap-3">
-              <PillButton variant="gold" className="glow-hover">
+              <PillButton variant="gold" className="glow-hover shadow-lg shadow-gold/20">
                 <Link to="/menu">Order Now</Link>
               </PillButton>
-              <PillButton variant="outline" className="glow-hover">
+              <PillButton variant="outline" className="glow-hover border-gold/70 text-forest-foreground hover:bg-gold hover:text-gold-foreground">
                 <Link to="/orders">Track an order</Link>
               </PillButton>
             </Reveal>
@@ -261,9 +263,9 @@ function Home() {
             </Reveal>
           </div>
           <Reveal variant="zoom" className="relative hidden justify-end self-end md:flex">
-            <div className="rounded-2xl border border-forest-foreground/20 bg-forest-foreground/10 px-5 py-3 shadow-lift backdrop-blur-md">
-              <div className="eyebrow text-gold">Free delivery</div>
-              <div className="font-display text-xl font-semibold">
+            <div className="rounded-3xl border border-gold/30 bg-[#0e3a23]/80 px-6 py-4 shadow-lift backdrop-blur-xl">
+              <div className="eyebrow text-gold font-bold">Free delivery</div>
+              <div className="font-display text-xl font-semibold text-forest-foreground">
                 on orders above {inr(s.free_delivery_threshold)}
               </div>
             </div>
@@ -279,33 +281,43 @@ function Home() {
 
       <section className="mx-auto max-w-6xl px-4 pt-16">
         <div className="mb-8 text-center">
-          <p className="eyebrow text-gold">Explore</p>
-          <h2 className="text-4xl font-semibold">Our Menu</h2>
+          <p className="eyebrow text-gold font-bold tracking-[0.25em]">Explore</p>
+          <h2 className="text-4xl font-semibold text-[#0e3a23]">Our Menu</h2>
           <div className="gold-rule mx-auto mt-4 w-40" />
         </div>
       </section>
-      <div className="relative mt-2 overflow-hidden py-2 [mask-image:linear-gradient(90deg,transparent,black_8%,black_92%,transparent)]">
-        <div className="animate-marquee flex w-max gap-4">
+      <div className="relative mt-2 overflow-hidden py-4 [mask-image:linear-gradient(90deg,transparent,black_8%,black_92%,transparent)]">
+        <div className="animate-marquee flex w-max gap-5">
           {[...data.categories, ...data.categories].map((c, i) => (
             <Link
               key={c.id + i}
               to="/menu"
               search={{ c: c.slug }}
               aria-hidden={i >= data.categories.length}
-              className="group relative w-52 shrink-0 overflow-hidden rounded-2xl shadow-card sm:w-64"
+              className="group relative w-56 shrink-0 overflow-hidden rounded-3xl bg-card border border-border/80 p-3 shadow-card transition-all duration-500 ease-out hover:-translate-y-2.5 hover:shadow-xl hover:shadow-gold/20 hover:border-gold/60 sm:w-64"
             >
-              <img
-                src={foodImage(c.image_key)}
-                alt={c.name}
-                loading="lazy"
-                width={816}
-                height={816}
-                className="aspect-square w-full object-cover transition duration-700 group-hover:scale-110"
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-cocoa/90 via-cocoa/20 to-transparent" />
-              <div className="absolute bottom-0 p-4 text-cocoa-foreground">
-                <div className="font-display text-xl font-semibold leading-tight">{c.name}</div>
-                <div className="text-xs opacity-80">{c.tagline}</div>
+              <div className="relative aspect-square w-full overflow-hidden rounded-2xl bg-muted/40">
+                <img
+                  src={foodImage(c.image_key)}
+                  alt={c.name}
+                  loading="lazy"
+                  width={816}
+                  height={816}
+                  className="h-full w-full object-cover transition-transform duration-700 ease-out group-hover:scale-108"
+                />
+              </div>
+              <div className="p-3 pt-3.5 text-left">
+                <div className="font-display text-xl font-bold leading-tight text-[#0e3a23] transition-colors duration-300 group-hover:text-primary">
+                  {c.name}
+                </div>
+                <div className="mt-1 text-xs text-[#0e3a23]/75 font-medium line-clamp-1">
+                  {c.tagline}
+                </div>
+                <div className="mt-3 flex items-center justify-between">
+                  <span className="text-[0.7rem] font-bold uppercase tracking-wider text-gold group-hover:underline">
+                    View items →
+                  </span>
+                </div>
               </div>
             </Link>
           ))}
@@ -320,21 +332,21 @@ function Home() {
             transform: `translateY(${(y - 1300) * 0.15}px)`,
           }}
         />
-        <div className="absolute inset-0 bg-cocoa/50" />
+        <div className="absolute inset-0 bg-gradient-to-r from-[#0e3a23]/85 via-[#0e3a23]/65 to-[#0e3a23]/85" />
         <div className="relative mx-auto flex min-h-[520px] max-w-6xl items-center justify-center px-4 py-20">
           <motion.div
             initial={{ opacity: 0, y: 40 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, amount: 0.4 }}
             transition={{ duration: 0.8 }}
-            className="max-w-xl rounded-3xl border border-forest-foreground/25 bg-forest-foreground/10 p-8 text-center text-forest-foreground shadow-lift backdrop-blur-xl md:p-12"
+            className="max-w-xl rounded-3xl border border-gold/45 bg-[#0e3a23]/75 p-8 text-center text-forest-foreground shadow-lift backdrop-blur-2xl ring-1 ring-gold/20 md:p-12"
           >
-            <p className="eyebrow text-gold">Freshly Baked Every Morning</p>
-            <h2 className="mt-3 text-4xl font-semibold md:text-5xl">From our oven to your door.</h2>
-            <p className="mt-4 text-lg opacity-90">
+            <p className="eyebrow text-gold font-bold tracking-[0.25em]">Freshly Baked Every Morning</p>
+            <h2 className="mt-3 text-4xl font-semibold md:text-5xl text-forest-foreground">From our oven to your door.</h2>
+            <p className="mt-4 text-lg opacity-90 text-forest-foreground/90">
               Experience the magic of School of Hotel Management.
             </p>
-            <PillButton variant="gold" className="glow-hover mt-8">
+            <PillButton variant="gold" className="glow-hover mt-8 shadow-lg shadow-gold/25">
               <Link to="/menu">Explore Combo Offers</Link>
             </PillButton>
           </motion.div>

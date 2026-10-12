@@ -39,7 +39,7 @@ function OrdersPage() {
       <p className="mb-8 text-muted-foreground">Orders placed from this device.</p>
       {(tokens === null || isLoading) && <p className="text-muted-foreground">Loading…</p>}
       {data && data.length === 0 && (
-        <div className="rounded-2xl bg-card p-10 text-center shadow-card">
+        <div className="rounded-3xl border border-border/80 bg-card p-10 text-center shadow-card">
           <Receipt className="mx-auto size-10 text-gold" />
           <p className="mt-3">No orders yet.</p>
           <Button asChild variant="gold" className="mt-4">
@@ -49,7 +49,7 @@ function OrdersPage() {
       )}
       <div className="space-y-4">
         {data?.map((o) => (
-          <div key={o.id} className="rounded-2xl bg-card p-5 shadow-card">
+          <div key={o.id} className="rounded-3xl border border-border/80 bg-card p-6 shadow-card transition-all duration-300 hover:shadow-lift">
             <div className="flex flex-wrap items-center justify-between gap-2">
               <div>
                 <div className="font-display text-xl font-semibold">#{o.order_number}</div>

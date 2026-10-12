@@ -50,21 +50,21 @@ function MenuPage() {
       <div className="mb-6 flex flex-col gap-4 md:flex-row md:items-end md:justify-between">
         <div>
           <p className="eyebrow text-gold">Freshly made every day</p>
-          <h1 className="text-5xl font-semibold">Menu</h1>
+          <h1 className="text-5xl font-semibold text-[#0e3a23]">Menu</h1>
           <Dialog>
             <DialogTrigger asChild>
-              <Button variant="outline" size="sm" className="mt-3">
+              <Button variant="outline" size="sm" className="mt-3 border-border/80 text-[#0e3a23] hover:border-gold hover:bg-gold/10 transition-all duration-300">
                 <FileImage /> View printed menu
               </Button>
             </DialogTrigger>
-            <DialogContent className="max-h-[92vh] max-w-2xl overflow-y-auto p-3">
+            <DialogContent className="max-h-[92vh] max-w-2xl overflow-y-auto p-3 bg-card border-border/80">
               <DialogTitle className="sr-only">The Classic Crush printed menu</DialogTitle>
               <img
                 src={printedMenu.url}
                 alt="The Classic Crush printed menu with all items and prices"
                 width={851}
                 height={1280}
-                className="w-full rounded-lg"
+                className="w-full rounded-2xl"
               />
               <Button asChild variant="gold" className="w-full">
                 <a href={printedMenu.url} download="classic-crush-menu.png">
@@ -75,16 +75,16 @@ function MenuPage() {
           </Dialog>
         </div>
         <div className="relative md:w-80">
-          <Search className="absolute left-3 top-1/2 size-4 -translate-y-1/2 text-muted-foreground" />
+          <Search className="absolute left-3.5 top-1/2 size-4 -translate-y-1/2 text-muted-foreground" />
           <Input
             value={q}
             onChange={(e) => setQ(e.target.value)}
             placeholder="Search dishes…"
-            className="h-11 rounded-full bg-card pl-9"
+            className="h-11 rounded-full border-border/80 bg-card pl-10 text-[#0e3a23] focus-visible:ring-gold"
           />
         </div>
       </div>
-      <div className="sticky top-16 z-30 -mx-4 mb-8 flex gap-2 overflow-x-auto bg-background/95 px-4 py-3 backdrop-blur">
+      <div className="sticky top-16 z-30 -mx-4 mb-8 flex gap-2 overflow-x-auto bg-background/95 px-4 py-3 backdrop-blur-md">
         <Chip to={undefined} active={active === "all"}>
           All
         </Chip>
@@ -100,8 +100,8 @@ function MenuPage() {
         return (
           <section key={cat.id} className="mb-12">
             <div className="mb-5 flex items-baseline gap-3">
-              <h2 className="text-3xl font-semibold">{cat.name}</h2>
-              <span className="text-sm text-muted-foreground">{cat.tagline}</span>
+              <h2 className="text-3xl font-semibold text-[#0e3a23]">{cat.name}</h2>
+              <span className="text-sm font-medium text-muted-foreground">{cat.tagline}</span>
             </div>
             <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
               {items.map((p) => (
@@ -132,10 +132,10 @@ function Chip({
       to="/menu"
       search={to ? { c: to } : {}}
       className={cn(
-        "shrink-0 rounded-full border px-4 py-2 text-sm font-medium transition",
+        "shrink-0 rounded-full border px-4.5 py-2 text-sm font-semibold transition-all duration-300",
         active
-          ? "border-primary bg-primary text-primary-foreground"
-          : "border-border bg-card hover:border-primary",
+          ? "border-primary bg-primary text-primary-foreground shadow-sm"
+          : "border-border/80 bg-card text-[#0e3a23] hover:border-gold hover:bg-gold/10",
       )}
     >
       {children}

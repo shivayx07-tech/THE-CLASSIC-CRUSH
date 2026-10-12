@@ -76,8 +76,8 @@ function Story() {
                 height={912}
                 className="h-full w-full scale-105 object-cover transition-transform duration-[3s] hover:scale-110"
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-cocoa/95 via-cocoa/40 to-transparent" />
-              <div className="absolute inset-x-0 bottom-0 px-6 pb-12 text-center text-cocoa-foreground md:pb-16">
+              <div className="absolute inset-0 bg-gradient-to-t from-[#0e3a23]/95 via-[#0e3a23]/40 to-transparent" />
+              <div className="absolute inset-x-0 bottom-0 px-6 pb-12 text-center text-forest-foreground md:pb-16">
                 <div className="relative mx-auto inline-block">
                   <span className="steam absolute -top-6 left-1/3" />
                   <span

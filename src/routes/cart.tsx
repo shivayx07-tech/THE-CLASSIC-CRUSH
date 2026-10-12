@@ -41,8 +41,8 @@ function CartPage() {
   return (
     <div className="mx-auto grid max-w-6xl gap-8 px-4 py-10 lg:grid-cols-[1fr_360px]">
       <div>
-        <h1 className="mb-6 text-5xl font-semibold">Your cart</h1>
-        <div className="divide-y rounded-2xl bg-card shadow-card">
+        <h1 className="mb-6 text-5xl font-semibold text-[#0e3a23]">Your cart</h1>
+        <div className="divide-y rounded-3xl border border-border/80 bg-card shadow-card">
           {cart.items.map((i) => (
             <div key={i.productId} className="flex items-center gap-4 p-4">
               <img
@@ -51,16 +51,16 @@ function CartPage() {
                 width={80}
                 height={80}
                 loading="lazy"
-                className="size-20 rounded-xl object-cover"
+                className="size-20 rounded-2xl object-cover"
               />
               <div className="flex-1">
-                <div className="font-display text-lg font-semibold">{i.name}</div>
+                <div className="font-display text-lg font-bold text-[#0e3a23]">{i.name}</div>
                 <div className="text-sm text-muted-foreground">{inr(i.price)} each</div>
               </div>
-              <div className="flex items-center gap-2 rounded-full border p-1">
+              <div className="flex items-center gap-2 rounded-full border border-border/80 p-1">
                 <button
                   aria-label="Decrease"
-                  className="grid size-8 place-items-center"
+                  className="grid size-8 place-items-center rounded-full hover:bg-accent transition"
                   onClick={() => cart.setQty(i.productId, i.qty - 1)}
                 >
                   <Minus className="size-4" />
@@ -68,17 +68,17 @@ function CartPage() {
                 <span className="w-5 text-center font-bold">{i.qty}</span>
                 <button
                   aria-label="Increase"
-                  className="grid size-8 place-items-center"
+                  className="grid size-8 place-items-center rounded-full hover:bg-accent transition"
                   onClick={() => cart.setQty(i.productId, i.qty + 1)}
                 >
                   <Plus className="size-4" />
                 </button>
               </div>
-              <div className="w-20 text-right font-bold">{inr(i.price * i.qty)}</div>
+              <div className="w-20 text-right font-bold text-[#0e3a23]">{inr(i.price * i.qty)}</div>
               <button
                 aria-label="Remove"
                 onClick={() => cart.remove(i.productId)}
-                className="text-muted-foreground hover:text-destructive"
+                className="text-muted-foreground transition hover:text-destructive"
               >
                 <Trash2 className="size-4" />
               </button>
@@ -86,22 +86,22 @@ function CartPage() {
           ))}
         </div>
       </div>
-      <aside className="h-fit space-y-4 rounded-2xl bg-card p-6 shadow-card lg:sticky lg:top-24">
-        <h2 className="text-2xl font-semibold">Summary</h2>
+      <aside className="h-fit space-y-4 rounded-3xl border border-border/80 bg-card p-6 shadow-card lg:sticky lg:top-24">
+        <h2 className="text-2xl font-semibold text-[#0e3a23]">Summary</h2>
         <div className="flex justify-between">
           <span>Subtotal</span>
-          <span className="font-bold">{inr(cart.subtotal)}</span>
+          <span className="font-bold text-[#0e3a23]">{inr(cart.subtotal)}</span>
         </div>
         <p className="text-xs text-muted-foreground">
           Delivery fee and taxes are calculated at checkout.
         </p>
         {s && short > 0 && (
-          <p className="rounded-lg bg-accent p-3 text-sm">
+          <p className="rounded-2xl border border-border/60 bg-accent/60 p-3 text-sm">
             Add {inr(short)} more to reach the minimum order of {inr(s.min_order_value)}.
           </p>
         )}
         {s && short <= 0 && toFree > 0 && (
-          <p className="rounded-lg bg-accent p-3 text-sm">
+          <p className="rounded-2xl border border-border/60 bg-accent/60 p-3 text-sm">
             Add {inr(toFree)} more for free delivery.
           </p>
         )}
@@ -110,7 +110,7 @@ function CartPage() {
           disabled={short > 0}
           variant="gold"
           size="lg"
-          className="w-full"
+          className="w-full glow-hover transition-all duration-300"
         >
           {short <= 0 ? (
             <Link to="/checkout">Proceed to checkout</Link>
