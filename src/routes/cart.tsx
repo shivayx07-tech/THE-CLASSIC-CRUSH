@@ -122,6 +122,29 @@ function CartPage() {
           Add more items
         </Link>
       </aside>
+
+      {/* Mobile Sticky Checkout Bar */}
+      <div className="fixed inset-x-3 bottom-[calc(4.25rem+max(env(safe-area-inset-bottom),0.35rem))] z-30 flex items-center justify-between gap-3 rounded-2xl border border-border/80 bg-card/95 p-3.5 shadow-[0_-8px_28px_rgba(14,58,35,0.12)] backdrop-blur-xl lg:hidden">
+        <div>
+          <div className="text-[0.68rem] font-bold uppercase tracking-wider text-muted-foreground">Subtotal</div>
+          <div className="font-display text-xl font-bold text-[#0e3a23]">{inr(cart.subtotal)}</div>
+        </div>
+        <Button
+          asChild={short <= 0}
+          disabled={short > 0}
+          variant="gold"
+          size="lg"
+          className="h-12 px-6 font-bold shadow-md transition-transform active:scale-95"
+        >
+          {short <= 0 ? (
+            <Link to="/checkout" className="flex items-center gap-2">
+              Proceed to checkout →
+            </Link>
+          ) : (
+            <span>Add {inr(short)} more</span>
+          )}
+        </Button>
+      </div>
     </div>
   );
 }

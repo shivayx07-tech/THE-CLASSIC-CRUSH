@@ -66,34 +66,38 @@ export function ProductCard({ p }: { p: Product }) {
           {p.name}
         </Link>
         <p className="line-clamp-2 text-sm text-muted-foreground">{p.description}</p>
-        <div className="mt-auto flex items-center justify-end pt-3">
+        <div className="mt-auto flex items-center justify-between gap-2 pt-3">
+          <div className="font-display text-lg font-bold text-[#0e3a23]">
+            {inr(p.price)}
+            {p.unit && <span className="block text-xs font-normal text-muted-foreground">{p.unit}</span>}
+          </div>
           {!p.is_available ? null : inCart ? (
-            <div className="flex items-center gap-2 rounded-full bg-primary px-1.5 py-0.5 text-primary-foreground shadow-sm transition-all duration-300">
+            <div className="flex items-center gap-1.5 rounded-full bg-primary px-1.5 py-0.5 text-primary-foreground shadow-sm transition-all duration-300">
               <button
-                aria-label="Decrease"
-                className="grid size-8 place-items-center transition-opacity hover:opacity-80"
+                aria-label="Decrease quantity"
+                className="grid size-9 place-items-center rounded-full transition-transform active:scale-90 hover:bg-white/15"
                 onClick={() => cart.setQty(p.id, inCart.qty - 1)}
               >
-                <Minus className="size-4" />
+                <Minus className="size-4 stroke-[2.5]" />
               </button>
-              <span className="min-w-4 text-center text-sm font-bold">{inCart.qty}</span>
+              <span className="min-w-5 text-center text-sm font-extrabold">{inCart.qty}</span>
               <button
-                aria-label="Increase"
-                className="grid size-8 place-items-center transition-opacity hover:opacity-80"
+                aria-label="Increase quantity"
+                className="grid size-9 place-items-center rounded-full transition-transform active:scale-90 hover:bg-white/15"
                 onClick={() => cart.setQty(p.id, inCart.qty + 1)}
               >
-                <Plus className="size-4" />
+                <Plus className="size-4 stroke-[2.5]" />
               </button>
             </div>
           ) : (
             <button
               onClick={() => {
                 cart.add({ productId: p.id, name: p.name, price: p.price, imageKey: p.image_key });
-                toast.success(`${p.name} added`);
+                toast.success(`${p.name} added to cart`);
               }}
-              className="inline-flex h-9.5 items-center gap-1.5 rounded-full border border-primary/90 px-4.5 text-sm font-semibold text-primary transition-all duration-300 hover:bg-primary hover:text-primary-foreground hover:shadow-md"
+              className="inline-flex h-10 min-w-24 items-center justify-center gap-1.5 rounded-full border-2 border-primary bg-primary/5 px-4 text-xs font-bold uppercase tracking-wider text-primary transition-all duration-300 hover:bg-primary hover:text-primary-foreground hover:shadow-md active:scale-95"
             >
-              <Plus className="size-4" /> Add
+              <Plus className="size-3.5 stroke-[2.5]" /> ADD
             </button>
           )}
         </div>

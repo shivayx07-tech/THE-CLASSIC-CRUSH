@@ -122,11 +122,11 @@ function ProductPage() {
                 </div>
                 <span className="text-muted-foreground">Total {inr(qty * p.price)}</span>
               </div>
-              <div className="flex flex-wrap gap-3">
-                <Button size="lg" onClick={() => add(false)}>
+              <div className="flex flex-col gap-3 sm:flex-row">
+                <Button size="lg" className="h-12 flex-1 rounded-2xl font-bold transition-transform active:scale-98" onClick={() => add(false)}>
                   Add to cart
                 </Button>
-                <Button size="lg" variant="gold" onClick={() => add(true)}>
+                <Button size="lg" variant="gold" className="h-12 flex-1 rounded-2xl font-bold transition-transform active:scale-98" onClick={() => add(true)}>
                   Buy now
                 </Button>
               </div>
@@ -140,8 +140,8 @@ function ProductPage() {
       </div>
       {related.length > 0 && (
         <section className="mt-16">
-          <h2 className="mb-5 text-3xl font-semibold">You may also like</h2>
-          <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
+          <h2 className="mb-5 text-3xl font-semibold text-[#0e3a23]">You may also like</h2>
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
             {related.map((r) => (
               <ProductCard key={r.id} p={r} />
             ))}

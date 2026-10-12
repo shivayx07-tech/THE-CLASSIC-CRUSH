@@ -55,11 +55,11 @@ export function SiteHeader() {
         <div className="flex items-center gap-2">
           <Link
             to="/cart"
-            className="relative inline-flex h-10 items-center gap-2 rounded-full border border-gold/30 bg-primary px-4.5 text-sm font-semibold text-primary-foreground shadow-sm transition-all duration-300 hover:-translate-y-0.5 hover:shadow-lift hover:brightness-110"
+            className="relative hidden h-10 items-center gap-2 rounded-full border border-gold/30 bg-primary px-4.5 text-sm font-semibold text-primary-foreground shadow-sm transition-all duration-300 hover:-translate-y-0.5 hover:shadow-lift hover:brightness-110 md:inline-flex"
             aria-label="Cart"
           >
             <ShoppingBag className="size-4" />
-            <span className="hidden sm:inline">Cart</span>
+            <span>Cart</span>
             {count > 0 && (
               <span className="grid h-5 min-w-5 place-items-center rounded-full bg-gold px-1 text-xs text-gold-foreground">
                 {count}

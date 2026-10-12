@@ -5,6 +5,7 @@ import { Search, FileImage, Download } from "lucide-react";
 import printedMenu from "@/assets/classic-crush-menu.png.asset.json";
 import { Button } from "@/components/ui/button";
 import { Dialog, DialogContent, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
+import { Drawer, DrawerTrigger, DrawerContent, DrawerHeader, DrawerTitle } from "@/components/ui/drawer";
 import { z } from "zod";
 import { menuQuery } from "@/lib/menu";
 import { ProductCard } from "@/components/site/ProductCard";
@@ -51,28 +52,61 @@ function MenuPage() {
         <div>
           <p className="eyebrow text-gold">Freshly made every day</p>
           <h1 className="text-5xl font-semibold text-[#0e3a23]">Menu</h1>
-          <Dialog>
-            <DialogTrigger asChild>
-              <Button variant="outline" size="sm" className="mt-3 border-border/80 text-[#0e3a23] hover:border-gold hover:bg-gold/10 transition-all duration-300">
-                <FileImage /> View printed menu
-              </Button>
-            </DialogTrigger>
-            <DialogContent className="max-h-[92vh] max-w-2xl overflow-y-auto p-3 bg-card border-border/80">
-              <DialogTitle className="sr-only">The Classic Crush printed menu</DialogTitle>
-              <img
-                src={printedMenu.url}
-                alt="The Classic Crush printed menu with all items and prices"
-                width={851}
-                height={1280}
-                className="w-full rounded-2xl"
-              />
-              <Button asChild variant="gold" className="w-full">
-                <a href={printedMenu.url} download="classic-crush-menu.png">
-                  <Download /> Download menu
-                </a>
-              </Button>
-            </DialogContent>
-          </Dialog>
+          {/* Mobile Bottom Sheet Drawer */}
+          <div className="sm:hidden">
+            <Drawer>
+              <DrawerTrigger asChild>
+                <Button variant="outline" size="sm" className="mt-3 border-border/80 text-[#0e3a23] hover:border-gold hover:bg-gold/10 transition-all duration-300">
+                  <FileImage className="size-4" /> View printed menu
+                </Button>
+              </DrawerTrigger>
+              <DrawerContent className="max-h-[88vh] p-4 bg-card border-border/80">
+                <DrawerHeader className="p-0 pb-3 text-left">
+                  <DrawerTitle className="font-display text-2xl text-[#0e3a23]">Printed Menu</DrawerTitle>
+                </DrawerHeader>
+                <div className="max-h-[62vh] overflow-y-auto rounded-2xl mb-3">
+                  <img
+                    src={printedMenu.url}
+                    alt="The Classic Crush printed menu"
+                    width={851}
+                    height={1280}
+                    className="w-full rounded-2xl"
+                  />
+                </div>
+                <Button asChild variant="gold" className="w-full">
+                  <a href={printedMenu.url} download="classic-crush-menu.png">
+                    <Download className="size-4" /> Download menu
+                  </a>
+                </Button>
+              </DrawerContent>
+            </Drawer>
+          </div>
+
+          {/* Desktop Dialog */}
+          <div className="hidden sm:inline-block">
+            <Dialog>
+              <DialogTrigger asChild>
+                <Button variant="outline" size="sm" className="mt-3 border-border/80 text-[#0e3a23] hover:border-gold hover:bg-gold/10 transition-all duration-300">
+                  <FileImage className="size-4" /> View printed menu
+                </Button>
+              </DialogTrigger>
+              <DialogContent className="max-h-[92vh] max-w-2xl overflow-y-auto p-4 bg-card border-border/80 rounded-3xl">
+                <DialogTitle className="font-display text-2xl text-[#0e3a23]">The Classic Crush printed menu</DialogTitle>
+                <img
+                  src={printedMenu.url}
+                  alt="The Classic Crush printed menu with all items and prices"
+                  width={851}
+                  height={1280}
+                  className="w-full rounded-2xl my-2"
+                />
+                <Button asChild variant="gold" className="w-full">
+                  <a href={printedMenu.url} download="classic-crush-menu.png">
+                    <Download className="size-4" /> Download menu
+                  </a>
+                </Button>
+              </DialogContent>
+            </Dialog>
+          </div>
         </div>
         <div className="relative md:w-80">
           <Search className="absolute left-3.5 top-1/2 size-4 -translate-y-1/2 text-muted-foreground" />
@@ -84,7 +118,7 @@ function MenuPage() {
           />
         </div>
       </div>
-      <div className="sticky top-16 z-30 -mx-4 mb-8 flex gap-2 overflow-x-auto bg-background/95 px-4 py-3 backdrop-blur-md">
+      <div className="sticky top-16 z-30 -mx-4 mb-8 flex gap-2.5 overflow-x-auto scrollbar-none touch-scroll bg-background/95 px-4 py-3 backdrop-blur-md">
         <Chip to={undefined} active={active === "all"}>
           All
         </Chip>
@@ -103,7 +137,7 @@ function MenuPage() {
               <h2 className="text-3xl font-semibold text-[#0e3a23]">{cat.name}</h2>
               <span className="text-sm font-medium text-muted-foreground">{cat.tagline}</span>
             </div>
-            <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
               {items.map((p) => (
                 <ProductCard key={p.id} p={p} />
               ))}

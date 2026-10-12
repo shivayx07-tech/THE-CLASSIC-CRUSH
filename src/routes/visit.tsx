@@ -127,7 +127,7 @@ function Visit() {
       <div className="relative mx-auto max-w-6xl px-4 py-16 md:py-24">
         <Reveal className="text-center">
           <p className="foil-text eyebrow !text-sm">Location & Timings</p>
-          <h1 className="foil-text mt-3 text-6xl font-semibold uppercase tracking-wide md:text-8xl">
+          <h1 className="foil-text mt-3 text-4xl font-semibold uppercase tracking-wide sm:text-6xl md:text-8xl">
             Come Find Us.
           </h1>
           <div className="gold-rule mx-auto mt-5 w-48" />

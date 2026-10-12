@@ -15,6 +15,8 @@ import appCss from "../styles.css?url";
 import { reportLovableError } from "../lib/lovable-error-reporting";
 import { CartProvider } from "@/lib/cart";
 import { SiteHeader, SiteFooter } from "@/components/site/SiteChrome";
+import { MobileBottomNav } from "@/components/site/MobileBottomNav";
+import { StickyBottomCartBar } from "@/components/site/StickyBottomCartBar";
 import { Toaster } from "@/components/ui/sonner";
 
 function NotFoundComponent() {
@@ -133,10 +135,12 @@ function RootComponent() {
     <QueryClientProvider client={queryClient}>
       <CartProvider>
         {!isAdmin && <SiteHeader />}
-        <main className="min-h-[60vh]">
+        <main className="min-h-[60vh] pb-24 md:pb-0">
           <Outlet />
         </main>
         {!isAdmin && <SiteFooter />}
+        {!isAdmin && <StickyBottomCartBar />}
+        {!isAdmin && <MobileBottomNav />}
         <Toaster position="top-center" richColors />
       </CartProvider>
     </QueryClientProvider>

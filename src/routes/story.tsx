@@ -93,7 +93,7 @@ function Story() {
                   </Reveal>
                 </div>
                 <Reveal delay={150}>
-                  <h1 className="glow-title mt-2 text-5xl font-semibold uppercase tracking-wide md:text-7xl">
+                  <h1 className="glow-title mt-2 text-4xl font-semibold uppercase tracking-wide sm:text-5xl md:text-7xl">
                     <span className="sparkle mr-3 text-2xl text-gold">✦</span>The Neighbourhood
                     Gathering
                     <span

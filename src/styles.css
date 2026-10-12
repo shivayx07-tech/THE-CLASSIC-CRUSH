@@ -460,3 +460,19 @@
     0 0 34px 2px color-mix(in oklab, var(--gold) 70%, transparent),
     24px 0 30px -12px var(--gold);
 }
+
+/* Mobile-first scrollbar hiding & touch smoothness */
+.scrollbar-none::-webkit-scrollbar,
+.no-scrollbar::-webkit-scrollbar {
+  display: none !important;
+}
+.scrollbar-none,
+.no-scrollbar {
+  -ms-overflow-style: none !important;
+  scrollbar-width: none !important;
+}
+.touch-scroll {
+  -webkit-overflow-scrolling: touch;
+  touch-action: pan-x;
+}
+

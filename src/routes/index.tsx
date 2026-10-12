@@ -286,15 +286,14 @@ function Home() {
           <div className="gold-rule mx-auto mt-4 w-40" />
         </div>
       </section>
-      <div className="relative mt-2 overflow-hidden py-4 [mask-image:linear-gradient(90deg,transparent,black_8%,black_92%,transparent)]">
-        <div className="animate-marquee flex w-max gap-5">
-          {[...data.categories, ...data.categories].map((c, i) => (
+      <div className="relative mt-2 overflow-x-auto scrollbar-none touch-scroll py-4 px-4 sm:px-6">
+        <div className="flex gap-4 sm:gap-5 pb-2">
+          {data.categories.map((c) => (
             <Link
-              key={c.id + i}
+              key={c.id}
               to="/menu"
               search={{ c: c.slug }}
-              aria-hidden={i >= data.categories.length}
-              className="group relative w-56 shrink-0 overflow-hidden rounded-3xl bg-card border border-border/80 p-3 shadow-card transition-all duration-500 ease-out hover:-translate-y-2.5 hover:shadow-xl hover:shadow-gold/20 hover:border-gold/60 sm:w-64"
+              className="group relative w-48 sm:w-60 shrink-0 overflow-hidden rounded-3xl bg-card border border-border/80 p-3 shadow-card transition-all duration-300 ease-out hover:-translate-y-2 hover:shadow-xl hover:shadow-gold/20 hover:border-gold/60 active:scale-95"
             >
               <div className="relative aspect-square w-full overflow-hidden rounded-2xl bg-muted/40">
                 <img

@@ -320,7 +320,7 @@ function Checkout() {
         <Button
           variant="gold"
           size="lg"
-          className="w-full"
+          className="w-full h-14 rounded-2xl text-base font-bold shadow-lift transition-all duration-300 hover:brightness-105 active:scale-[0.98]"
           disabled={busy || !s.is_open || (!!t.error && (mode === "pickup" || !!zoneId))}
           onClick={submit}
         >
